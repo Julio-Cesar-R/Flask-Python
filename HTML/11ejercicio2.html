@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 2 html</title>
+</head>
+<body>
+    <h1>REGISTRO DE USUARIOS</h1>
+    <form action="resultado.html" method="get">
+
+        Nombre <input type="text" name="nombres" placeholder="Nombres"required>
+        Apellidos <input type="text" name="apellidos" placeholder="Apellidos"required>
+
+        <p></p>
+        Email <input type="email" name="email" placeholder="Email"required>
+        Password <input type="password" name="password" placeholder="Password" required>
+        <p></p>
+
+        <h3>¿Eres mayor de edad?</h3>
+        Sí<input type="radio" name="edad" value="1">
+        No<input type="radio" name="edad" value="0">
+        
+    
+        <p></p>
+        <h3>Selecciona el yipo de plan</h3>
+        <select name="plan" >
+            <option value="d">Diaria</option>
+            <option value="s">Semanal</option>
+            <option value="m">Mensual</option>
+            
+        </select>
+        <p></p>
+        <p>Selecciona el color</p>
+        <input type="color" name="color" >
+        
+        <p></p>
+        <input type="submit" value="Enviar">
+
+
+    </form>
+</body>
+</html>

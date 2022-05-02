@@ -1,0 +1,5 @@
+ETIQUETAS
+https://developer.mozilla.org/es/docs/Web/Html
+
+TIPOS DE INPUT EN FORMULARIOS
+https://developer.mozilla.org/es/docs/web/html/element/input
