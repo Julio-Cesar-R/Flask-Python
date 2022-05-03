@@ -1,0 +1,36 @@
+<!-- ESTA ES UNA ESTRUCTURA DE LA CUAL LAS PAGINAS 1 Y 2 TOMARAN LA ESTRUCTURA-->
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estructura</title>
+</head>
+<body>
+    <div>
+        <!--ESTOS ENLACES HACEN REFERENCIA NO A LA URL DEL HTML SI NO A LA FUNCION DE LAS APIS-->
+
+        <a href="{{url_for('formulario')}}"> Formulario</a>
+        
+        
+    </div>
+    <!--LINEAS DE SEPARACION ESTETICAS-->
+    <br/>
+    <hr/>
+    <br/>
+    <!--ESTOS BLOCKS HACEN REFERENCIA A ESPACIOS QUE PUEDEN USAR LOS OTROS ARCHIVOS HTML-->
+    {%block contenido%}
+
+    {%endblock%}
+
+    <br/>
+    <hr/>
+    <br/>
+
+
+    <h5>Esto es un pie de pagina</h5>
+    
+</body>
+</html>

@@ -1,0 +1,25 @@
+{%extends "estructura.html"%}
+
+{%block contenido%}
+<h2>Validacion</h2>
+
+{% if coincidencia%}
+<h3>El texto ingresado es correcto</h3><!--Variables recuperadas del formulario-->
+{%else%}
+<h3>El texto no es el correcto</h3>
+    <ul>
+        {%if not minuscula%}
+            <li>El texto no tiene minusculas</li>
+        {%endif%}
+        {%if not mayuscula%}
+            <li>El texto no tiene mayusculas</li>
+        {%endif%}
+        {%if not numero%}
+            <li>El texto no tiene numeros</li>
+        {%endif%}
+        {%if not longuitud%}
+            <li>El texto debe tener minimo 6 caracteres</li>
+        {%endif%}
+    </ul>
+{%endif%}
+{%endblock%}

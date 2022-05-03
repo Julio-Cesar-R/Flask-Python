@@ -1,0 +1,19 @@
+{%extends "estructura.html"%}
+
+{%block contenido%}
+<h2>Introduce el nombre a validar</h2>
+<h3>Debe cumplir con lo siguiente: </h3>
+<ul>
+    <li>Debe comenzar con una mayuscula</li>
+    <li>Debe tener almenos una minuscula</li>
+    <li>Debe contener un numero</li>
+</ul>
+
+<form action="{{url_for('respuesta')}}">
+    Nombre <input type="text" name="nombre"placeholder="Nombres" >
+    <input type="submit" value="Enviar datos">
+
+
+</form>
+
+{%endblock%}

@@ -1,5 +1,5 @@
 #programa principal
-
+#Sirve para identificar desde que fichero se esta ejecutando una funcion
 print("Estamos en el fichero programa_principal.py")
 
 def saludo():

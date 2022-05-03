@@ -1,0 +1,15 @@
+{%extends "estructura.html"%}
+
+{%block contenido%}
+
+<h3>Ingrese la informacio</h3>
+<form action="{{url_for('gracias')}}">
+    Nombre <input type="text" name="nombre"placeholder="Nombres" >
+    <br/>
+    Apellidos<input type="text" name="apellidos" placeholder="Apellidos">
+    <input type="submit" value="Enviar datos">
+
+
+</form>
+
+{%endblock%}
