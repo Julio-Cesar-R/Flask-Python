@@ -1,0 +1,22 @@
+<!----------------------VISTA BASE------------------------------------->
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Gestión de mascotas</title>
+  </head>
+  <body>
+    <div>
+      <!--Redireccion de templates-->
+      <a href="{{ url_for('principal')}}"> Principal </a><!--"url_for('principal'" en el archivo app-->
+      <a href="{{ url_for('lista')}}"> Listar </a>
+      <a href="{{ url_for('alta')}}"> Añadir </a>
+      <a href="{{ url_for('borrar')}}"> Eliminar </a>
+    </div>
+    <!--Block de contenido-->
+    {% block contenido %}
+
+    {% endblock %}
+    
+  </body>
+</html>

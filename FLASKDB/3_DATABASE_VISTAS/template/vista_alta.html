@@ -1,0 +1,13 @@
+{% extends "vista_base.html" %}
+
+{% block contenido %}
+
+<h3> Alta de nueva mascota  </h3>
+<!--Insertar registro-->
+<form method="POST">
+  {{ formulario.hidden_tag() }}<!--Clave secreta-->
+  {{ formulario.nombre.label }} {{ formulario.nombre }}
+  {{ formulario.boton }}
+</form>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+<!-- VALIDA SI EL FORMULARIO YA FUE ENVIADO-->
+{% if enviado%}
+    <p>Hola {{nombre}}, buenos dias </p>
+{%else%}
+    <p>Introduce tus datos en el formulario</p>
+{%endif%}
+
+<form method="POST">
+    <!--PALABRA SECRETA-->
+    {{formulario.hidden_tag()}}
+    <!--Formulario-->
+    {{formulario.nombre.label}} {{formulario.nombre}}
+    {{formulario.enviar}}
+</form>
