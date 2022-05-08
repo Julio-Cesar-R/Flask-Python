@@ -16,11 +16,12 @@ basededatos=SQLAlchemy(app)
 Migrate(app,basededatos)
 #---------------BASE DE DATOS MODELO---------------------
 class PersonaDB(basededatos.Model):
-    nombre=basededatos.Column(basededatos.String(100),primary_key=True)
+    id = basededatos.Column(basededatos.Integer, primary_key=True)
+    nombre = basededatos.Column(basededatos.String(100))
     def __init__ (self,nombre):
-        self.nombre=nombre
+        self.nombre = nombre
     def json(self):
-        return {"nombre":self.nombre}
+        return {"id":self.id , "nombre": self.nombre}
 
 #------------------------------------------------------------
 
@@ -28,31 +29,38 @@ class PersonaDB(basededatos.Model):
 class Personas(Resource):
     #GET
     def get(self,valor):
-        persona=PersonaDB.query.filter_by(nombre=valor).first()
+        persona=PersonaDB.query.filter_by(id=valor).first()
         if persona:
             return persona.json()
         return {"resultado":"Persona no existe en la base de datos"}
+
     #POST
-    def post(self,valor):
+
+    def post (self,valor):
         persona=PersonaDB(nombre=valor)
         basededatos.session.add(persona)
         basededatos.session.commit()
         return {"respuesta":"Nombre añadido a la base de datos"}
     #DELETE
     def delete(self,valor):
-        persona=PersonaDB.query.filter_by(nombre=valor).first()
+        persona=PersonaDB.query.filter_by(id=valor).first()
         basededatos.session.delete(persona)
         basededatos.session.commit()
         return {"resultado":"Persona borrada correctamente"}
-#BUSCAR LISTA COMPLETA       
+
+#BUSCAR LISTA COMPLETA
+
 class Lista(Resource):
     def get(self):
         personas=PersonaDB.query.all()
         lista_personas=[persona.json()for persona in personas]
-        return {"resultado":lista_personas} 
+        return {"resultado":lista_personas}
+
+
 api.add_resource(Personas,"/personas/<string:valor>")
 api.add_resource(Lista,"/lista")
+
 #---------------------------------------------------------------------
 
-if __name__== "__main__":
+if __name__ == "__main__":
     app.run(debug=True)
