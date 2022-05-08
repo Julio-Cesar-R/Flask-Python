@@ -36,7 +36,9 @@ class Personas(Resource):
 
     #POST
 
-    def post (self,valor):
+    def post (self,valor,valor2):
+        print(valor)
+        print(valor2)
         persona=PersonaDB(nombre=valor)
         basededatos.session.add(persona)
         basededatos.session.commit()
@@ -57,7 +59,7 @@ class Lista(Resource):
         return {"resultado":lista_personas}
 
 
-api.add_resource(Personas,"/personas/<string:valor>")
+api.add_resource(Personas,"/personas/<string:valor>,<string:valor2>")
 api.add_resource(Lista,"/lista")
 
 #---------------------------------------------------------------------
