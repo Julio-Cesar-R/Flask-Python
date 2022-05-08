@@ -18,10 +18,14 @@ Migrate(app,basededatos)
 class PersonaDB(basededatos.Model):
     id = basededatos.Column(basededatos.Integer, primary_key=True)
     nombre = basededatos.Column(basededatos.String(100))
-    def __init__ (self,nombre):
+    apellido = basededatos.Column(basededatos.String(100))
+    direccion = basededatos.Column(basededatos.String(100))
+    def __init__ (self,nombre,apellido,direccion):
         self.nombre = nombre
+        self.apellido=apellido
+        self.direccion=direccion
     def json(self):
-        return {"id":self.id , "nombre": self.nombre}
+        return {"id":self.id , "nombre": self.nombre,"apellido":self.apellido,"direccion":self.direccion}
 
 #------------------------------------------------------------
 
@@ -36,10 +40,11 @@ class Personas(Resource):
 
     #POST
 
-    def post (self,valor,valor2):
+    def post (self,valor,valor2,valor3):
         print(valor)
         print(valor2)
-        persona=PersonaDB(nombre=valor)
+        print(valor3)
+        persona=PersonaDB(nombre=valor,apellido=valor2,direccion=valor3)
         basededatos.session.add(persona)
         basededatos.session.commit()
         return {"respuesta":"Nombre añadido a la base de datos"}
@@ -58,8 +63,8 @@ class Lista(Resource):
         lista_personas=[persona.json()for persona in personas]
         return {"resultado":lista_personas}
 
-
-api.add_resource(Personas,"/personas/<string:valor>,<string:valor2>")
+#Cantidad de parametros que recibe la appi (cadaa ruta utiliza cuantos sean necesarios)
+api.add_resource(Personas,"/personas/<string:valor>,<string:valor2>,<string:valor3>")
 api.add_resource(Lista,"/lista")
 
 #---------------------------------------------------------------------
