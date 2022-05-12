@@ -7,6 +7,9 @@ from wtforms import StringField,IntegerField,SubmitField
 #------------------FORMULARIOS----------------------------------------------
 class FormularioAlta(FlaskForm):
     nombre=StringField("Nombre de la mascota :")
+    edad=IntegerField("Edad de la mascota :")
+    sexo=StringField("Sexo de la mascota :")
+    dueno=StringField("Nombre del dueño: ")
     boton=SubmitField("Añadir")
 
 class FormularioBaja(FlaskForm):

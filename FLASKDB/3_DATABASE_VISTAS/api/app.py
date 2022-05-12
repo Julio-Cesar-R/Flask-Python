@@ -1,5 +1,6 @@
 #-----------------------LIBRERIAS---------------------------
 #Ruta de la base
+from email.mime import base
 import os
 #Formularios FlaskForm
 from formulario import FormularioAlta, FormularioBaja
@@ -46,12 +47,19 @@ class Mascota(basededatos.Model):
     __tablename__ = 'Mascotas'
     id = basededatos.Column(basededatos.Integer, primary_key = True)
     nombre = basededatos.Column(basededatos.Text)
+    edad= basededatos.Column(basededatos.Integer)
+    sexo=basededatos.Column(basededatos.Text)
+    dueno=basededatos.Column(basededatos.Text)
     #Constructor
-    def __init__(self,nombre):
+    def __init__(self,nombre,edad,sexo,dueno):
         self.nombre = nombre
+        self.edad= edad
+        self.sexo= sexo
+        self.dueno= dueno
+
     #Mensaje de la clase
     def __repr__(self):
-        texto = " Mascota : nombre {}".format(self.nombre)
+        texto = " Mascota\n : identificador: {}\n nombre: {}\n edad :{}\n sexo :{}\n dueno :{}\n".format(self.id,self.nombre,self.edad, self.sexo, self.dueno)
         return texto
 #---------------------------------------------------------------------------------
 
@@ -72,7 +80,10 @@ def alta():
     formulario = FormularioAlta()
     if formulario.validate_on_submit():
         nombre = formulario.nombre.data
-        mascota = Mascota(nombre)
+        edad=formulario.edad.data
+        sexo= formulario.sexo.data
+        dueno=formulario.dueno.data
+        mascota = Mascota(nombre,edad,sexo,dueno)
         #Insertar en la base
         basededatos.session.add(mascota)
         basededatos.session.commit()
