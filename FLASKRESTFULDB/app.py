@@ -32,7 +32,7 @@ class PersonaDB(basededatos.Model):
 #----------------RUTAS------------------------------
 class Personas(Resource):
     #GET
-    def get(self,valor):
+    def get(self,valor,valor2,valor3):
         persona=PersonaDB.query.filter_by(id=valor).first()
         if persona:
             return persona.json()
@@ -49,7 +49,7 @@ class Personas(Resource):
         basededatos.session.commit()
         return {"respuesta":"Nombre añadido a la base de datos"}
     #DELETE
-    def delete(self,valor):
+    def delete(self,valor,valor2,valor3):
         persona=PersonaDB.query.filter_by(id=valor).first()
         basededatos.session.delete(persona)
         basededatos.session.commit()
