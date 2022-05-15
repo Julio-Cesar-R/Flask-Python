@@ -1,5 +1,5 @@
 #----------------------LIBRERIAS----------------------------
-from flask import Flask
+from flask import Flask,request,jsonify
 from flask_restful  import Resource,Api
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
@@ -16,7 +16,7 @@ basededatos=SQLAlchemy(app)
 Migrate(app,basededatos)
 #---------------BASE DE DATOS MODELO---------------------
 class PersonaDB(basededatos.Model):
-    id = basededatos.Column(basededatos.Integer, primary_key=True)
+    id_p = basededatos.Column(basededatos.Integer, primary_key=True)
     nombre = basededatos.Column(basededatos.String(100))
     apellido = basededatos.Column(basededatos.String(100))
     direccion = basededatos.Column(basededatos.String(100))
@@ -25,32 +25,35 @@ class PersonaDB(basededatos.Model):
         self.apellido=apellido
         self.direccion=direccion
     def json(self):
-        return {"id":self.id , "nombre": self.nombre,"apellido":self.apellido,"direccion":self.direccion}
+        return {"id_p":self.id_p , "nombre": self.nombre,"apellido":self.apellido,"direccion":self.direccion}
 
 #------------------------------------------------------------
 
 #----------------RUTAS------------------------------
 class Personas(Resource):
     #GET
-    def get(self,valor,valor2,valor3):
-        persona=PersonaDB.query.filter_by(id=valor).first()
+    def get(self,valor):
+        persona=PersonaDB.query.filter_by(id_p=valor).first()
         if persona:
             return persona.json()
         return {"resultado":"Persona no existe en la base de datos"}
 
     #POST
 
-    def post (self,valor,valor2,valor3):
-        print(valor)
-        print(valor2)
-        print(valor3)
-        persona=PersonaDB(nombre=valor,apellido=valor2,direccion=valor3)
+    def post (self,valor):
+        
+        name=request.json["nombre"]
+        lastname=request.json["apellido"]
+        adrees=request.json["direccion"]
+        persona=PersonaDB(nombre=name,apellido=lastname,direccion=adrees)
         basededatos.session.add(persona)
         basededatos.session.commit()
         return {"respuesta":"Nombre añadido a la base de datos"}
+
+        
     #DELETE
-    def delete(self,valor,valor2,valor3):
-        persona=PersonaDB.query.filter_by(id=valor).first()
+    def delete(self,valor):
+        persona=PersonaDB.query.filter_by(id_p=valor).first()
         basededatos.session.delete(persona)
         basededatos.session.commit()
         return {"resultado":"Persona borrada correctamente"}
@@ -63,8 +66,8 @@ class Lista(Resource):
         lista_personas=[persona.json()for persona in personas]
         return {"resultado":lista_personas}
 
-#Cantidad de parametros que recibe la appi (cadaa ruta utiliza cuantos sean necesarios)
-api.add_resource(Personas,"/personas/<string:valor>,<string:valor2>,<string:valor3>")
+
+api.add_resource(Personas,"/personas/<string:valor>")
 api.add_resource(Lista,"/lista")
 
 #---------------------------------------------------------------------
